@@ -2,8 +2,7 @@
 // Created by Daniel Bartolini on 5/20/24.
 //
 
-#ifndef SOFT_SYNTH_SYNTH_H
-#define SOFT_SYNTH_SYNTH_H
+#pragma once
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -76,23 +75,3 @@ bool loadMedia();
 // Frees media and shuts down SDL
 void close();
 
-// Window
-SDL_Window* gWindow = NULL;
-
-// Window renderer
-SDL_Renderer* gRenderer = NULL;
-
-// Scene texture
-LTexture gPromptTexture;
-
-// Load music
-Mix_Music* gMusic = NULL;
-
-// Sound effects to load
-Mix_Chunk* gScratch = NULL;
-Mix_Chunk* gHigh = NULL;
-Mix_Chunk* gMedium = NULL;
-Mix_Chunk* gLow = NULL;
-
-
-#endif //SOFT_SYNTH_SYNTH_H

@@ -1,8 +1,23 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <stdio.h>
+
 #include "synth.h"
+
+// Window
+SDL_Window* gWindow = NULL;
+
+// Window renderer
+SDL_Renderer* gRenderer = NULL;
+
+// Scene texture
+LTexture gPromptTexture;
+
+// Load music
+Mix_Music* gMusic = NULL;
+
+// Sound effects to load
+Mix_Chunk* gScratch = NULL;
+Mix_Chunk* gHigh = NULL;
+Mix_Chunk* gMedium = NULL;
+Mix_Chunk* gLow = NULL;
 
 LTexture::LTexture()
 {
@@ -242,7 +257,7 @@ bool loadMedia()
     // Load prompt texture
 
     // Load music
-    gMusic = Mix_LoadMUS("./assets/beat.wav");
+    gMusic = Mix_LoadMUS("../assets/beat.wav");
     if (gMusic == NULL)
     {
         printf("Failed to load music! SDL_mixer error: %s\n", Mix_GetError());
@@ -250,28 +265,28 @@ bool loadMedia()
     }
 
     // Load sound effects
-    gScratch = Mix_LoadWAV("./assets/scratch.wav");
+    gScratch = Mix_LoadWAV("../assets/scratch.wav");
     if (gScratch == NULL)
     {
         printf("Failed to load 'scratch' sound effect! SDL_mixer error: %s\n", Mix_GetError());
         success = false;
     }
 
-    gScratch = Mix_LoadWAV("./assets/high.wav");
+    gScratch = Mix_LoadWAV("../assets/high.wav");
     if (gScratch == NULL)
     {
         printf("Failed to load 'high' sound effect! SDL_mixer error: %s\n", Mix_GetError());
         success = false;
     }
 
-    gScratch = Mix_LoadWAV("./assets/medium.wav");
+    gScratch = Mix_LoadWAV("../assets/medium.wav");
     if (gScratch == NULL)
     {
         printf("Failed to load 'medium' sound effect! SDL_mixer error: %s\n", Mix_GetError());
         success = false;
     }
 
-    gScratch = Mix_LoadWAV("./assets/low.wav");
+    gScratch = Mix_LoadWAV("../assets/low.wav");
     if (gScratch == NULL)
     {
         printf("Failed to load 'low' sound effect! SDL_mixer error: %s\n", Mix_GetError());
