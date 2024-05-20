@@ -20,7 +20,7 @@ set(SDL2_IMAGE_INCLUDE_DIR "${CMAKE_PREFIX_PATH}/SDL2_image/include")
 set(SDL2_IMAGE_LIBRARY "${CMAKE_PREFIX_PATH}/SDL2_image/lib/libSDL2_image.dylib")
 
 if (EXISTS ${SDL2_IMAGE_INCLUDE_DIR} AND EXISTS ${SDL2_IMAGE_LIBRARY})
-    include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+    include_directories(${SDL2_IMAGE_INCLUDE_DIR}/SDL2/)
     message(STATUS "Found SDL2_image: ${SDL2_IMAGE_LIBRARY}")
 else()
     message(FATAL_ERROR "SDL2_image not found!")
@@ -31,14 +31,16 @@ set(SDL2_MIXER_INCLUDE_DIR "${CMAKE_PREFIX_PATH}/SDL2_mixer/include")
 set(SDL2_MIXER_LIBRARY "${CMAKE_PREFIX_PATH}/SDL2_mixer/lib/libSDL2_mixer.dylib")
 
 if (EXISTS ${SDL2_MIXER_INCLUDE_DIR} AND EXISTS ${SDL2_MIXER_LIBRARY})
-    include_directories(${SDL2_MIXER_INCLUDE_DIR})
+    include_directories(${SDL2_MIXER_INCLUDE_DIR}/SDL2/)
     message(STATUS "Found SDL2_mixer: ${SDL2_MIXER_LIBRARY}")
 else()
     message(FATAL_ERROR "SDL2_mixer not found!")
 endif()
 
 # Add your executable
-add_executable(soft-synth main.cpp)
+add_executable(soft-synth main.cpp
+        synth.h
+        synth.cpp)
 
 # Link libraries to your executable
-target_link_libraries(soft-synth PRIVATE ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
+target_link_libraries(soft-synth PRIVATE ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY} ${SDL2_MIXER_LIBRARY})
