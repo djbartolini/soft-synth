@@ -1,6 +1,9 @@
-//Using SDL and standard IO
 #include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <stdio.h>
+#include <string>
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
