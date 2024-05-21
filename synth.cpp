@@ -7,17 +7,6 @@ SDL_Window* gWindow = NULL;
 // Window renderer
 SDL_Renderer* gRenderer = NULL;
 
-// Scene texture
-LTexture gPromptTexture;
-
-// Load music
-Mix_Music* gMusic = NULL;
-
-// Sound effects to load
-Mix_Chunk* gScratch = NULL;
-Mix_Chunk* gHigh = NULL;
-Mix_Chunk* gMedium = NULL;
-Mix_Chunk* gLow = NULL;
 
 LTexture::LTexture()
 {
@@ -249,49 +238,23 @@ bool init()
     return success;
 }
 
-bool loadMedia()
+void closeWindow()
 {
-    // success flag
-    bool success = true;
+    // Destory window
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
+    gWindow = NULL;
+    gRenderer = NULL;
+}
 
-    // Load prompt texture
+void clearScreen()
+{
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
 
-    // Load music
-    gMusic = Mix_LoadMUS("../assets/beat.wav");
-    if (gMusic == NULL)
-    {
-        printf("Failed to load music! SDL_mixer error: %s\n", Mix_GetError());
-        success = false;
-    }
+}
 
-    // Load sound effects
-    gScratch = Mix_LoadWAV("../assets/scratch.wav");
-    if (gScratch == NULL)
-    {
-        printf("Failed to load 'scratch' sound effect! SDL_mixer error: %s\n", Mix_GetError());
-        success = false;
-    }
-
-    gScratch = Mix_LoadWAV("../assets/high.wav");
-    if (gScratch == NULL)
-    {
-        printf("Failed to load 'high' sound effect! SDL_mixer error: %s\n", Mix_GetError());
-        success = false;
-    }
-
-    gScratch = Mix_LoadWAV("../assets/medium.wav");
-    if (gScratch == NULL)
-    {
-        printf("Failed to load 'medium' sound effect! SDL_mixer error: %s\n", Mix_GetError());
-        success = false;
-    }
-
-    gScratch = Mix_LoadWAV("../assets/low.wav");
-    if (gScratch == NULL)
-    {
-        printf("Failed to load 'low' sound effect! SDL_mixer error: %s\n", Mix_GetError());
-        success = false;
-    }
-
-    return success;
+void updateScreen()
+{
+    SDL_RenderPresent(gRenderer);
 }

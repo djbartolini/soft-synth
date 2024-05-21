@@ -75,3 +75,9 @@ bool loadMedia();
 // Frees media and shuts down SDL
 void close();
 
+void closeWindow();
+
+void clearScreen();
+
+void updateScreen();
+
